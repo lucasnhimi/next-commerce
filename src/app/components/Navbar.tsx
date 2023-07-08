@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { SignedIn, SignedOut } from '@clerk/nextjs/app-beta';
+import { SignInButton, UserButton } from '@clerk/nextjs';
 
 function Navbar() {
   return (
@@ -9,6 +11,18 @@ function Navbar() {
       >
         Next Store
       </Link>
+      <div className='flex items-center gap-8'>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <SignedOut>
+          <SignInButton mode='modal'>
+            <button className='border rounded-md border-gray-400 px-3 py-2'>
+              Fazer Login
+            </button>
+          </SignInButton>
+        </SignedOut>
+      </div>
     </nav>
   );
 }
