@@ -23,9 +23,6 @@ async function getProducts(): Promise<ProductType[]> {
       };
     })
   );
-
-  console.log(formatedProducts);
-
   return formatedProducts;
 }
 export default async function Home() {
