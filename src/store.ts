@@ -21,7 +21,7 @@ export const useCartStore = create<CartState>()(
           if (product) {
             const updatedCart = state.cart.map((p) => {
               if (p.id === item.id) {
-                return { ...p, quatity: p.quantity ? p.quantity + 1 : 1 };
+                return { ...p, quantity: p.quantity ? p.quantity + 1 : 1 };
               }
               return p;
             });
