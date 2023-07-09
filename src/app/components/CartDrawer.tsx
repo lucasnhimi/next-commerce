@@ -43,7 +43,10 @@ export default function CartDrawer() {
               >
                 Adicionar
               </button>
-              <button className='py-1 px-2 border rounded-md mt-2 text-sm'>
+              <button
+                onClick={() => useStore.removeProduct(item)}
+                className='py-1 px-2 border rounded-md mt-2 text-sm'
+              >
                 Remover
               </button>
             </div>
