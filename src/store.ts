@@ -7,8 +7,8 @@ type CartState = {
   addProduct: (product: ProductType) => void;
   removeProduct: (product: ProductType) => void;
   isOpen: boolean;
-  clearCart: () => void;
   toggleCart: () => void;
+  clearCart: () => void;
   onCheckout: string;
   setCheckout: (checkout: string) => void;
   paymentIntent: string;
