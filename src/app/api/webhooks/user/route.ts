@@ -66,22 +66,40 @@ async function handler(request: Request) {
       apiVersion: '2022-11-15',
     });
 
-    const customer = await stripe.customers.create({
-      name: `${first_name} ${last_name}`,
-      email: email_addresses ? email_addresses[0].email_address : '',
-    });
+    
 
-    await prisma.user.upsert({
-      where: { externalId: id as string },
-      create: {
-        externalId: id as string,
-        stripeCustomerId: customer.id,
-        attributes,
-      },
-      update: {
-        attributes,
-      },
-    });
+    if (first_name && last_name) {
+      const {
+        id,
+        first_name,
+        last_name,
+        email_addresses,
+        primary_email_address_id,
+        ...attributes
+      } = evt.data;
+
+      const customer = await stripe.customers.create({
+        name: `${first_name} ${last_name}`,
+        email: email_addresses ? email_addresses[0].email_address : '',
+      });
+
+      if (customer) {
+
+        await prisma.user.upsert({
+          where: { externalId: id as string },
+          create: {
+            externalId: id as string,
+            stripeCustomerId: customer.id,
+            attributes,
+          },
+          update: {
+            attributes,
+          },
+        });
+      }
+    }
+
+
   }
 
   return NextResponse.json({}, { status: 200 });
