@@ -4,6 +4,7 @@ import { useCartStore } from '@/store';
 import Image from 'next/image';
 import CheckoutButton from './CheckoutButton';
 import Checkout from './Checkout';
+import OrderCompleted from './OrderCompleted';
 
 export default function CartDrawer() {
   const useStore = useCartStore();
@@ -69,6 +70,7 @@ export default function CartDrawer() {
         )}
 
         {useStore.onCheckout === 'checkout' && <Checkout />}
+        {useStore.onCheckout === 'success' && <OrderCompleted />}
       </div>
     </div>
   );
