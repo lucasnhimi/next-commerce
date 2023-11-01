@@ -2,11 +2,12 @@
 import prisma from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 import Stripe from "stripe";
 
 async function handler(request: Request) {
   const body = await request.text();
-  const sig = request.headers.get("stripe-signature") || "";
+  const sig = headers().get("stripe-signature") || "";
   
   if (!sig) {
     return new Response("No signature", { status: 400 });
